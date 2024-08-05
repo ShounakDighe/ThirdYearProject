@@ -1,0 +1,66 @@
+/* App.css */
+body {
+  font-family: Arial, sans-serif;
+  background: url('https://www.dqlabs.in/images/MIT-World-Peace-University.png') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  position: relative; /* For positioning the register link */
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.register-link {
+  position: absolute;
+  bottom: 10px; /* Distance from the bottom */
+  right: 10px;  /* Distance from the right */
+  color: #007bff;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,22 @@
+/* HomePage.css */
+.homepage-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #eaeaea; /* Background color for the homepage */
+    text-align: center;
+    position: relative;
+  }
+  
+  .title {
+    position: absolute;
+    top: 20px; /* Adjust this value as needed to position the title */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2em;
+    color: #333;
+    margin: 0;
+  }
+  
