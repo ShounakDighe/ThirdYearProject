@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './RegisterPage.css'; // Import CSS for the RegisterPage
 
 function RegisterPage() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate(); // Hook to programmatically navigate
 
-  const handleRegister = (event) => {
+  const handleRegister = async (event) => {
     event.preventDefault();
-    alert(`Username: ${username}\nEmail: ${email}\nPassword: ${password}`);
-    setUsername('');
-    setEmail('');
-    setPassword('');
+    try {
+      const response = await axios.post('http://localhost:5000/api/register', {
+        username,
+        email,
+        password
+      });
+      setMessage(response.data.message);
+      if (response.data.message === 'User registered successfully') {
+        // Redirect to login page on successful registration
+        setTimeout(() => navigate('/'), 2000); // Redirect after 2 seconds
+      }
+    } catch (error) {
+      setMessage('Error registering user: ' + (error.response?.data?.message || error.message));
+    }
   };
 
   return (
@@ -41,6 +55,7 @@ function RegisterPage() {
         />
         <button type="submit">Register</button>
       </form>
+      {message && <p>{message}</p>}
     </div>
   );
 }

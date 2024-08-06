@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 import HomePage from './HomePage';
 import RegisterPage from './RegisterPage'; // Import the RegisterPage component
@@ -7,14 +8,23 @@ import RegisterPage from './RegisterPage'; // Import the RegisterPage component
 function App() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loginMessage, setLoginMessage] = useState('');
   const navigate = useNavigate(); // Hook to programmatically navigate
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    alert(`Username: ${username}\nPassword: ${password}`);
-    setUsername('');
-    setPassword('');
-    navigate('/homepage'); // Navigate to the homepage route
+    try {
+      const response = await axios.post('http://localhost:5000/api/login', {
+        username,
+        password
+      });
+      setLoginMessage(response.data.message);
+      if (response.data.success) {
+        navigate('/homepage'); // Navigate to the homepage route on successful login
+      }
+    } catch (error) {
+      setLoginMessage('Error logging in: ' + (error.response?.data?.message || error.message));
+    }
   };
 
   return (
@@ -37,6 +47,7 @@ function App() {
         />
         <button type="submit">Login</button>
       </form>
+      {loginMessage && <p>{loginMessage}</p>}
       <Link to="/register" className="register-link">Register</Link>
     </div>
   );
